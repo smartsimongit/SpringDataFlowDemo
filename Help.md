@@ -61,11 +61,14 @@ Spring Cloud Data Flow демо с кафкой
 
 Пример для SpringDataFlowDemo
 
-> app register --name product-service --type source --uri maven:// 
+> app register --name processor-service --type source --uri maven:// 
+> app register --name processor-service --type source --uri file://home/smartsimon/SpringDataFlowDemo/processor-service/target/processor-service.jar 
 
-> app register --name discount-service --type processor --uri maven:// 
+> app register --name sink-service --type processor --uri maven:// 
+> app register --name sink-service --type processor --uri file://home/smartsimon/SpringDataFlowDemo/sink-service/target/sink-service.jar
 
-> app register --name courier-service --type sink --uri maven:// 
+> app register --name source-service --type sink --uri maven:// 
+> app register --name source-service --type sink --uri file://home/smartsimon/SpringDataFlowDemo/source-service/target/source-service.jar
 
 ###### . Start и Deploy Stream(а) 
 

@@ -80,7 +80,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <finalName>discount-service</finalName>
+        <finalName>processor-service</finalName>
     </build>
 
 </project>
