@@ -24,3 +24,6 @@ hs_err_pid*
 /.idea/
 /processor-service/processor-service.iml
 /sink-service/sink-service.iml
+/sink-service/target/
+/source-service/target/
+/processor-service/target/
