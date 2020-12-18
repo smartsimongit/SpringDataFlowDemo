@@ -47,7 +47,7 @@ Spring Cloud Data Flow демо с кафкой
 
 ###### 7. Запустить Spring Cloud Data Flow shell  
 
-> java -jar  spring-cloud-dataflow-shell-2.7.0
+> java -jar  spring-cloud-dataflow-shell-2.7.0.jar
 
 или
 
