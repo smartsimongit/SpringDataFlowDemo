@@ -16,7 +16,7 @@ Spring Cloud Data Flow демо с кафкой
 
 ###### 3. Запустить Kafka сервер 
 
-> ./bin/kafka-server-start.sh $HOME/kafka_2.11-2.3.1/config/server.properties
+> ./bin/kafka-server-start.sh $HOME/kafka_2.13-2.6.0/config/server.properties
 
 ###### 4. Скачать Spring Cloud Data Flow Docker Compose: стандартная конфигурация и Server Jars
 
