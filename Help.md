@@ -34,11 +34,13 @@ Spring Cloud Data Flow Demo
 
 > app register  --name source-service --type source --uri file://root/scdf/source-service-0.0.1-SNAPSHOT.jar
 
-###### 5. Создать стрим из приложений в админке dataflow  
+###### 5. Создать стрим 
+
+> stream create --definition "source-service | processor-service | sink-service" --name test-stream
 
 ###### 6. Start и Deploy Stream(а)
 
-> stream deploy --name log-data   - или это можно сделать иак же в админке dataflow
+> stream deploy --name test-stream   - или это можно сделать иак же в админке dataflow
 
 
 ______________________________________________
