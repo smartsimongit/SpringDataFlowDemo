@@ -21,7 +21,7 @@ Spring Cloud Data Flow Demo
 
 
 
-
+Grafana логин/пароль admin/admin
 
 
 https://dataflow.spring.io/docs/installation/local/docker-customize/#prometheus--grafana

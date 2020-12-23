@@ -16,12 +16,16 @@ public class SinkServiceApplication {
     Logger logger = LoggerFactory.getLogger(SinkServiceApplication.class);
 
     @StreamListener(Sink.INPUT)
-    public void orderDispatcher(List<PostPackage> postPackages) {
-        postPackages.forEach(postPackage -> {
-            logger.info("it sending to  : " + postPackage.getDestination());
-        });
-    }
+//    public void orderDispatcher(List<PostPackage> postPackages) {
+//        postPackages.forEach(postPackage -> {
+//            logger.info("it sending to  : " + postPackage.getDestination());
+//        });
+//    }
+    public void orderDispatcher(String postPackages) {
 
+            logger.info("string  : " + postPackages);
+
+    }
     public static void main(String[] args) {
         SpringApplication.run(SinkServiceApplication.class, args);
     }
