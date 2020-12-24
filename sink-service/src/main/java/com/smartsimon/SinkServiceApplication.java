@@ -22,6 +22,7 @@ public class SinkServiceApplication {
             StringBuilder text = new StringBuilder();
             for (String str : stringList) {
                 text.append(str);
+
                 text.append(" ");
             }
             logger.info("\nAfter transform we have   " + stringList.size() + " words");
