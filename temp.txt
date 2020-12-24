@@ -15,6 +15,11 @@
 
 > ./bin/kafka-server-start.sh $HOME/kafka_2.13-2.6.0/config/server.properties
 
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+
+
 ###### 4. Скачать Spring Cloud Data Flow  Server Jar
 
 > https://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-server/2.7.0/spring-cloud-dataflow-server-2.7.0.jar

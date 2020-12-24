@@ -14,18 +14,22 @@ import java.util.List;
 @EnableBinding(Sink.class)
 public class SinkServiceApplication {
     Logger logger = LoggerFactory.getLogger(SinkServiceApplication.class);
+    static private Boolean isReaded = Boolean.FALSE;
 
     @StreamListener(Sink.INPUT)
-//    public void orderDispatcher(List<PostPackage> postPackages) {
-//        postPackages.forEach(postPackage -> {
-//            logger.info("it sending to  : " + postPackage.getDestination());
-//        });
-//    }
-    public void orderDispatcher(String postPackages) {
-
-            logger.info("string  : " + postPackages);
-
+    public void orderDispatcher(List<String> stringList) {
+        if (!isReaded) {
+            StringBuilder text = new StringBuilder();
+            for (String str : stringList) {
+                text.append(str);
+                text.append(" ");
+            }
+            logger.info("\nAfter transform we have   " + stringList.size() + " words");
+            logger.info("\nTEXT IS \n" + text);
+            isReaded = Boolean.TRUE;
+        }
     }
+
     public static void main(String[] args) {
         SpringApplication.run(SinkServiceApplication.class, args);
     }

@@ -8,6 +8,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Setter
 @ConfigurationProperties("pulldata-task")
 public class CustomProperties {
-    private String testStringVar;
+    private String badWord;
 
 }

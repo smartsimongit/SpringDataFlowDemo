@@ -6,8 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Getter
 @Setter
-@ConfigurationProperties("pulldata-task")
+@ConfigurationProperties("app")
 public class CustomProperties {
-    private String testFileName;
+    private String testFileName="";
 
 }

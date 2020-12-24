@@ -11,14 +11,15 @@ import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.integration.annotation.Transformer;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @EnableBinding(Processor.class)
 @EnableConfigurationProperties(CustomProperties.class)
 @SpringBootApplication
 public class ProcessorServiceApplication {
-
-
+    static private Boolean isReaded = Boolean.FALSE;
+    public int countBugs = 0;
     Logger logger = LoggerFactory.getLogger(ProcessorServiceApplication.class);
 
     public static void main(String[] args) {
@@ -29,31 +30,20 @@ public class ProcessorServiceApplication {
     private CustomProperties processorProperties;
 
     @Transformer(inputChannel = Processor.INPUT, outputChannel = Processor.OUTPUT)
-    public String setDestination(String postPackages) {
-        logger.info("test var is " + processorProperties.getTestStringVar());
-
-        logger.info("before " + postPackages.length());
-        postPackages = postPackages.replace("В", "");
-        logger.info("after " + postPackages.length());
-
-        return postPackages;
+    public List<String> editStringList(List<String> stringList) {
+    if (!isReaded) {    logger.info("\nString List Before Transformation keep " + stringList.size() + " element(s)");
+        logger.info("\nBad Word today is " + processorProperties.getBadWord());}
+        List<String> newList = new ArrayList<>();
+        for (String str : stringList) {
+            if (str.equals(processorProperties.getBadWord())) {
+                if (!isReaded) { logger.info("\nwe find bad word # " + (++countBugs));}
+            }
+            //todo можно ужадить
+            if (!str.equals(processorProperties.getBadWord()))  {
+                newList.add(str);
+            }
+        }
+        isReaded = Boolean.TRUE;
+        return newList;
     }
-//    public List<PostPackage> setDestination(List<PostPackage> postPackages) {
-//        logger.info("test var is " + processorProperties.getTestStringVar());
-//        List<PostPackage> newPostPackagesList = new ArrayList<>();
-//        for (PostPackage postPackage : postPackages) {
-//            if (postPackage.getIndex() == 101000) {
-//                postPackage.setDestination("Msc");
-//            }
-//            if (postPackage.getIndex() == 190000) {
-//                postPackage.setDestination("SPb");
-//            }
-//            if (postPackage.getIndex() == 620000) {
-//                postPackage.setDestination("Ekb");
-//            }
-//            logger.info("Index is {}, and destination is {} ", postPackage.getIndex(), postPackage.getDestination());
-//            newPostPackagesList.add(postPackage);
-//        }
-//        return newPostPackagesList;
-//    }
 }
