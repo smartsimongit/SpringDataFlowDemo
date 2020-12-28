@@ -19,21 +19,22 @@ import java.util.List;
 @EnableConfigurationProperties(CustomProperties.class)
 @SpringBootApplication
 public class ProcessorServiceApplication {
+
+    Logger logger = LoggerFactory.getLogger(ProcessorServiceApplication.class);
     static private Boolean isReaded = Boolean.FALSE;
     public int countBugs = 0;
-    Logger logger = LoggerFactory.getLogger(ProcessorServiceApplication.class);
 
-    public static void main(String[] args) {
-        SpringApplication.run(ProcessorServiceApplication.class, args);
-    }
 
     @Autowired
     private CustomProperties processorProperties;
 
-    @Autowired
-    private MeterRegistry meterRegistry;
+
 
     private static CounterMetrics counterMetrics;
+
+
+    @Autowired
+    private MeterRegistry meterRegistry;
     @Bean
     public CounterMetrics getCounterMetrics() {
         return new CounterMetrics(meterRegistry);
@@ -42,6 +43,7 @@ public class ProcessorServiceApplication {
 
     @Transformer(inputChannel = Processor.INPUT, outputChannel = Processor.OUTPUT)
     public List<String> editStringList(List<String> stringList) {
+
         counterMetrics = getCounterMetrics();
         if (!isReaded) {
             logger.info("\nString List Before Transformation keep " + stringList.size() + " element(s)");
@@ -50,17 +52,23 @@ public class ProcessorServiceApplication {
         List<String> newList = new ArrayList<>();
         for (String str : stringList) {
             if (str.equals(processorProperties.getBadWord())) {
+
                 if (!isReaded) {
                     logger.info("\nwe find bad word # " + (++countBugs));
-                    counterMetrics.incrementCount();
+                    counterMetrics.incrementWordCount();
                 }
             }
-
             if (!str.equals(processorProperties.getBadWord())) {
                 newList.add(str);
             }
         }
         isReaded = Boolean.TRUE;
+
+        counterMetrics.incrementFileCount();
         return newList;
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(ProcessorServiceApplication.class, args);
     }
 }
